@@ -6,6 +6,8 @@
 % not recommended: authoryear, alphabetic-verb, 
 \newcommand{\quoteStyle}{alphabetic-verb}
 
+%\usepackage{german}
+
 %% Fonts
 %% palatino, goudysans, lmodern or libertine
 \newcommand{\documentFont}{lmodern}
@@ -24,9 +26,19 @@
 
 %% Color settings
 \newcommand{\defineColors}{%
-	\definecolor{LinkColor}{HTML}{\linkColor}
+	\definecolor{LinkColor}{HTML}{00007A}
 	\definecolor{ListingBackground}{HTML}{F8F8F8}
 }
+\usepackage[dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
+
+
+% Signature settings
+\usepackage[signature=signature, nolocation, nojob]{mysignature}
+
+
+
+
 
 %% Syntax Highlighting (Listings)
 \newcommand{\listingsettings}{%
@@ -54,6 +66,49 @@
 		aboveskip=20pt,
 		keywordstyle=\color[rgb]{0.133,0.133,0.6},
 		commentstyle=\color[rgb]{0.133,0.545,0.133},
-		stringstyle=\color[rgb]{0.627,0.126,0.941}
+		stringstyle=\color[rgb]{0.627,0.126,0.941},
+        % Eigene Ergänzungen
+        inputencoding=utf8,
+        extendedchars=true,
+    	literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{{\ss}}1 {€}{{\euro}}1
 	}
+	
+	%% Syntax Highlighting KOTLIN
+	\lstdefinelanguage{Kotlin}{
+      keywords={package, as, as?, typealias, this, super, val, var, fun, for, null, true, false, is, in, throw, return, break, continue, object, if, try, else, while, do, when, class, interface, enum, object, companion, override, public, private, get, set, import, abstract, vararg, expect, actual, where, suspend, data, internal, \begin{comment}dynamic,\end{comment} final, by},
+      keywordstyle=\color{NavyBlue}\bfseries,
+      ndkeywords={@Deprecated, @JvmName, @JvmStatic, @JvmOverloads, @JvmField, @JvmSynthetic, @Override, Iterable, Int, Long, Integer, Short, Byte, Float, Double, String, Boolean, Runnable, Array},
+      ndkeywordstyle=\color{BurntOrange}\bfseries,
+      emph={println, return@, forEach, map, mapNotNull, first, filter, firstOrNull, lazy, delegate},
+      emphstyle={\color{OrangeRed}},
+      identifierstyle=\color{black},
+      sensitive=true,
+      commentstyle=\color{gray}\ttfamily,
+      comment=[l]{//},
+      morecomment=[s]{/*}{*/},
+      stringstyle=\color{ForestGreen}\ttfamily,
+      morestring=[b]",
+      morestring=[s]{"""*}{*"""},
+    }
+    
+    %% Syntax Highlighting YAML
+    %% evtl. farben ändern
+    \lstdefinelanguage{yaml}{
+      keywords={true,false,null,y,n},
+      keywordstyle=\color{Orange}\bfseries,
+      basicstyle=\color{black}\bfseries\ttfamily,                                 % assuming a key comes first
+      sensitive=false,
+      comment=[l]{\#},
+      morecomment=[s]{/*}{*/},
+      commentstyle=\color{Purple}\ttfamily,
+      stringstyle=\color{ForestGreen}\mdseries\ttfamily,
+      moredelim=[l][\color{Orange}]{\&},
+      moredelim=[l][\color{Magenta}]{*},
+      moredelim=**[il][\color{red}\mdseries{:}\color{ForestGreen}\mdseries]{:},   % switch to value style at :
+      morestring=[b]',
+      morestring=[b]",
+      literate =    {>}{{\textcolor{red}\textgreater}}1
+                    {|}{{\textcolor{red}\textbar}}1 
+                    {\ -\ }{{\mdseries\ -\ }}3,
+    }
 }
